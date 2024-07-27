@@ -1,1 +1,13 @@
-### some logs as i navigate this shit
+### some notes as i navigate this shit
+
+the contract id is this thing that is storing the data
+CDUOUAKRRWK7L5FJTVC6BI4ST5RLIAQEXR4TBJRJOQGXDBUVBPS2MUAW
+
+this is retrieving the data
+stellar contract invoke \
+  --id CDUOUAKRRWK7L5FJTVC6BI4ST5RLIAQEXR4TBJRJOQGXDBUVBPS2MUAW \
+  --source alice \
+  --network testnet \
+  -- \
+  hello \
+  --to RPC
