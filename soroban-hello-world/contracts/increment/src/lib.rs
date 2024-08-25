@@ -29,6 +29,44 @@ impl IncrementContract {
         // Return the count to the caller.
         count
     }
+
+    /// get_current_value returns the current value of the counter.
+    pub fn get_current_value(env: Env) -> u32 {
+        env.storage().instance().get(&COUNTER).unwrap_or(0)
+    }
+
+    pub fn decrement(env: Env) -> u32 {
+        // Get the current count.
+        let mut count: u32 = env.storage().instance().get(&COUNTER).unwrap_or(0);
+
+        // Decrement the count if greater than 0.
+        if count > 0 {
+            count -= 1;
+        }
+
+        // Save the count.
+        env.storage().instance().set(&COUNTER, &count);
+
+        // Extend TTL.
+        env.storage().instance().extend_ttl(50, 100);
+
+        // Return the count to the caller.
+        count
+    }
+
+    /// Reset resets the counter to 0, and returns the new value.
+    pub fn reset(env: Env) -> u32 {
+        let count: u32 = 0;
+
+        // Save the count.
+        env.storage().instance().set(&COUNTER, &count);
+
+        // Extend TTL.
+        env.storage().instance().extend_ttl(50, 100);
+
+        // Return the reset value.
+        count
+    }
 }
 
 mod test;
